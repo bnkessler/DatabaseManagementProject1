@@ -20,7 +20,7 @@ PRIMARY KEY(emp_no)
 -- Creating the 'skills' table
 CREATE TABLE SKILLS (
 skill_no INT,
-emp_no INT,
+skill_name VARCHAR(100),
 PRIMARY KEY(skill_no)
 );
 
@@ -28,7 +28,6 @@ PRIMARY KEY(skill_no)
 CREATE TABLE EMPLOYEE_SKILLS (
 skill_no INT,
 emp_no INT,
-skill_name VARCHAR(100),
 PRIMARY KEY (skill_no, emp_no),
 FOREIGN KEY (skill_no) REFERENCES skills(skill_no),
 FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
@@ -102,6 +101,7 @@ install_date DATE,
 install_time TIME,
 component_id INT,
 emp_no INT,
+car_id INT,
 PRIMARY KEY(install_id),
 FOREIGN KEY (component_id) REFERENCES EQUIPMENT(component_id),
 FOREIGN KEY(emp_no) REFERENCES ENGINEERS(emp_no)
@@ -158,10 +158,6 @@ FOREIGN KEY(component_id) REFERENCES EQUIPMENT(component_id)
 );
 
 # Value Insertion
-
-# car, races, manufacturer, in house, third party, equipment, install, employees, drivers, pitwall, pit crew, engineers (12)
-
-# sponsors, employee skills, skills, logistics
 
 INSERT INTO MANUFACTURER (manufacturer_id, component_id) VALUES
 (01, 101),
@@ -303,13 +299,13 @@ INSERT INTO CAR (car_id, manufacturer_id, install_id, race_id, sponsor_id) VALUE
 
 INSERT INTO LOGISTICS (shipment_no, race_id, emp_no, transportation_type, fuel_cost, transit_time, num_stops, quantity) VALUES
 (601, 401, 10011, 'Truck', 1200.50, 15.5, 3, 100),
-(602, 402, 10012, 'Airplane', 4500.75, 7.2, 1, 80),
-(603, 403, 10013, 'Ship', 3200.20, 12.8, 2, 120),
-(604, 401, 10014, 'Truck', 1100.25, 14.0, 2, 90),
+(602, 401, 10012, 'Airplane', 4500.75, 7.2, 1, 80),
+(603, 401, 10013, 'Ship', 3200.20, 12.8, 2, 120),
+(604, 402, 10014, 'Truck', 1100.25, 14.0, 2, 90),
 (605, 402, 10015, 'Airplane', 4800.60, 6.5, 1, 75),
-(606, 403, 10016, 'Ship', 3000.40, 13.2, 3, 110),
-(607, 401, 10017, 'Truck', 1050.30, 16.3, 3, 95),
-(608, 402, 10018, 'Airplane', 4700.90, 7.8, 1, 85),
+(606, 402, 10016, 'Ship', 3000.40, 13.2, 3, 110),
+(607, 403, 10017, 'Truck', 1050.30, 16.3, 3, 95),
+(608, 403, 10018, 'Airplane', 4700.90, 7.8, 1, 85),
 (609, 403, 10019, 'Ship', 3300.15, 11.6, 2, 105),
 (610, 401, 10020, 'Truck', 1150.80, 15.0, 2, 100);
 
@@ -369,29 +365,34 @@ INSERT INTO THIRD_PARTY (company_no, manufacturer_id, company_name, company_loca
 (19, 09, 'Intel', 'California'),
 (20, 10, 'BWT', 'England');
 
-INSERT INTO SKILLS (skill_no, emp_no) VALUES
-(1, 10001),
-(2, 10002),
-(3, 10003),
-(4, 10004),
-(5, 10005),
-(6, 10006),
-(7, 10007),
-(8, 10008),
-(9, 10009),
-(10, 10010);
+INSERT INTO EMPLOYEE_SKILLS (skill_no, emp_no) VALUES
+(1, 10011),
+(2, 10012),
+(3, 10013),
+(4, 10014),
+(5, 10015),
+(6, 10016),
+(7, 10017),
+(8, 10018),
+(9, 10019),
+(10, 10020),
+(6, 10011),
+(3, 10017),
+(4, 10011),
+(9, 10015),
+(3, 10018);
 
-INSERT INTO EMPLOYEE_SKILLS (skill_no, emp_no, skill_name) VALUES
-(1, 10001, 'Java Programming'),
-(2, 10002, 'Data Analysis'),
-(3, 10003, 'Project Management'),
-(4, 10004, 'Graphic Design'),
-(5, 10005, 'Database Administration'),
-(6, 10006, 'Network Security'),
-(7, 10007, 'Digital Marketing'),
-(8, 10008, 'Web Development'),
-(9, 10009, 'Machine Learning'),
-(10, 10010, 'Financial Analysis');
+INSERT INTO SKILLS (skill_no, skill_name) VALUES
+(1, 'Java Programming'),
+(2, 'Data Analysis'),
+(3, 'Project Management'),
+(4, 'Graphic Design'),
+(5, 'Database Administration'),
+(6, 'Network Security'),
+(7, 'Digital Marketing'),
+(8, 'Web Development'),
+(9, 'Machine Learning'),
+(10, 'Financial Analysis');
 
 INSERT INTO SPONSORS (sponsor_id, emp_no, car_id, component_id, sponsor_name, contract_duration, contract_terms) VALUES
 (701, 10021, 501, 101, 'Tech Innovations', 2, 'Digital advertising and event sponsorship'),
